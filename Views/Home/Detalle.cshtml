@@ -1,0 +1,104 @@
+﻿@model WaffleWebWorksTpFinal.Models.CarreraIma
+<!-- model toma los parametrso de  carrera-->
+@{
+    ViewData["Title"] = "Detalle";
+}
+<!--toma los valores  del model-->
+<h1>@Html.DisplayFor(model => model.Name)</h1>
+
+<div>
+    <br>
+    <!--toma los valores el nombre del parametro de carrera-->
+    <h4>@Html.DisplayNameFor(model=> model.Description)</h4>
+    
+
+    <hr />
+    <dl class="row">
+        
+
+        <dd class = "col-sm-8">
+            <!--toma los valores  del model-->
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+            <dd class = "col-sm-4">
+            <!--toma los valores  del model https://drive.google.com/uc?export=view&id=-->
+            <img src=" @Html.DisplayFor(model => model.Imagen)" width="100%" class="border border-dark rounded">
+                <!--<img src="https://drive.google.com/uc?export=view&id=1z_dh1O5iqOfnivzdsOOLfdlPEKxxzolH" width="100%"  role="button" class="btn btn-large btn-primary" data-toggle="modal">-->
+
+            </dd>
+        
+    </dl>
+</div>
+<div>
+     <!--un textoq ue te aparece como elimianar, redirecciona al delete, y le pasa el paramerteo id-->
+    @*@Html.ActionLink("Eliminar", "Delete", new {  id = Model.Id }) *@
+    <a asp-action="Delete" asp-route-id="@Model.Id"><input type="submit" value="Eliminar" class="btn btn-primary btn-danger" /></a>|
+    <!--un texto que direcciona a victormodal mediante el click-->
+    <a  width="100%"  href="#victorModal" role="button" class="btn btn-large btn-primary btn-success" data-toggle="modal">Modificar   </a> 
+     <p>
+         <!--victormodal la panatalla emergente que me gusto usar y punto-->
+    <div id="victorModal" class="modal fade">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="container modal-title">@Html.DisplayFor(model => model.Name)</h4>
+                                        </div>
+                          
+                                        <div class="modal-body">
+                                            <!-- realiza la accion detalle abuse del detalle y crea uno identitco pero con el httpost y punto, si igual el edit y el detalle muesdtran lo mismo-->
+                                            <form asp-action="Detalle">
+                                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                                <input type="hidden" asp-for="Id" />
+                                                <div class="form-group">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label asp-for="Name" class="control-label"></label>
+                                                    <input asp-for="Name"   class="form-control" />
+                                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label asp-for="Description" class="control-label"></label>
+                                                    <!--   <textarea asp-for="Description" class="form-control " rows="10" cols="40">@Html.DisplayFor(model => model.Description)</textarea> 
+-->                                                 
+                                                    <!--aarea de texto mucho mas grande y lindo, rellenar la lo que muestra por que sino paarece cualquier cosa-->
+                                                    <textarea asp-for="Description" class="form-control " rows="10" cols="40">@Html.DisplayFor(model => model.Description)</textarea> 
+                                                     <span asp-validation-for="Description" class="text-danger"></span>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label asp-for="Imagen" class="control-label">Link de drive</label>
+                                                    <input asp-for="Imagen"   class="form-control" />
+                                                    <span asp-validation-for="Imagen" class="text-danger"></span>
+                                                </div>
+           
+            
+                                                <div class="form-group">
+                                                    <br />
+                                                    <input type="submit" value="Editar" class="btn btn-primary btn-success" />
+                                                </div>
+                                                
+                  
+                                            </form>
+                                            
+                                            <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default btn-info" data-dismiss="modal">Cerrar</button>
+                                                    <a asp-action="Delete" asp-route-id="@Model.Id"><input type="submit" value="Eliminar" class="btn btn-primary btn-danger" /></a>
+
+                                                 @*   @Html.ActionLink("Eliminar", "Delete", new {  id = Model.Id })
+                                                     *@
+                                                    
+                                            </div>
+                                          </div>     
+                                       </div>   
+                                 </div>
+                    </div>
+    </p>
+
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-info">Volver atras</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

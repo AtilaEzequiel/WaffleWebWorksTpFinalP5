@@ -1,0 +1,66 @@
+﻿@model IEnumerable<WaffleWebWorksTpFinal.Models.CarreraIma>
+
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+<!-- Compiled and minified Bootstrap CSS -->
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >-->
+<!-- Minified JS library -->
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+-->
+<!-- Compiled and minified Bootstrap JavaScript -->
+<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>-->
+
+
+<div class="text-center">
+    <h1 class="display-4">Carreras</h1>
+    <!--<h2 class="display-6"> Modelos</h2>-->
+   @*<p>
+         <a asp-controller="Movies" asp-action="Index" class="modal-content" ><input type="submit" value="Movies" class="btn btn-primary  " /> </a>
+    </p*@ 
+
+    <hr />
+   <div class="container">
+      <div class="row">
+       
+          <!-- render selection-->
+          <!--repite el for hasta qur termine la lista, -->
+               @foreach (var item in Model) { 
+                    
+	                <div class="col-sm-4">
+                          <div class="border border-dark rounded">
+                            <img src="@Html.DisplayFor(modelItem => item.Imagen)" width="100%"  >
+                              <h3>@Html.DisplayFor(modelItem => item.Name)</h3>
+                              <p>
+                                  @*  <a asp-controller="MovieADO" asp-action="Index" class="modal-content" ><input type="submit" value="Horarios" class="btn btn-primary  " /> </a>
+                                        *@
+                                        
+                                        
+                                                <a asp-action="Detalle" asp-route-id="@item.Id"><input type="submit" value="Detalle" class="btn btn-primary btn-info " /></a>
+                                                <a asp-action="Delete" asp-route-id="@item.Id"><input type="submit" value="Eliminar" class="btn btn-primary btn-danger  " /></a>
+                              </p>
+
+
+
+
+
+
+
+                          </div>
+                    <br />
+                   
+                    </div>  
+                
+               } 
+                    
+            
+            
+         
+  @*          @RenderSection("Footer", required: true);
+
+           @RenderSectionAsync("Scripts", required: false)
+           *@
+        </div>
+   </div>
+</div>   

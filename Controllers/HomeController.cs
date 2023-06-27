@@ -120,7 +120,7 @@ namespace WaffleWebWorksTpFinal.Controllers
 
                 //ejecuta la consulta
                 SqlDataReader reader = command.ExecuteReader();
-                
+                //SqkData render = command.ExecuteReader();
 
                 connection.Close();
 

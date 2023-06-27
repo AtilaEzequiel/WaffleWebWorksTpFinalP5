@@ -314,3 +314,16 @@ namespace WaffleWebWorksTpFinal.Controllers
         }
     }
 }
+
+
+/*
+ CREATE TABLE [dbo].[CarreraImagen] (
+    [Id]           INT            IDENTITY (1, 1) NOT NULL,
+    [carrera]      NVARCHAR (100) NOT NULL,
+    [Descripcion]  VARCHAR (MAX)  NOT NULL,
+    [nombreimagen] VARCHAR (MAX)  NOT NULL
+);
+
+https://localhost:7021/images/logo3.jpeg
+
+ */

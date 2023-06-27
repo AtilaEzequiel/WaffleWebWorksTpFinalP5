@@ -119,7 +119,8 @@ namespace WaffleWebWorksTpFinal.Controllers
                 
 
                 //ejecuta la consulta
-                SqlDataReader reader = command.ExecuteReader();
+               // SqlDataReader reader = command.ExecuteReader();
+                command.ExecuteNonQuery();
                 //SqkData render = command.ExecuteReader();
 
                 connection.Close();
@@ -209,7 +210,8 @@ namespace WaffleWebWorksTpFinal.Controllers
 
 
 
-                SqlDataReader reader = command.ExecuteReader();
+                //SqlDataReader reader = command.ExecuteReader();
+                command.ExecuteNonQuery();
 
 
                 connection.Close();
@@ -285,7 +287,8 @@ namespace WaffleWebWorksTpFinal.Controllers
                 command.Parameters.AddWithValue("@Id", mov.Id);
 
 
-                SqlDataReader reader = command.ExecuteReader();
+               // SqlDataReader reader = command.ExecuteReader();
+                command.ExecuteNonQuery();
 
 
                 connection.Close();

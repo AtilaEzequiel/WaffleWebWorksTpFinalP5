@@ -69,9 +69,10 @@ namespace WaffleWebWorksTpFinal.Controllers
         }
 
 
-
+        //cosa de seguridad de traspasod e datos
         [HttpPost]
         [ValidateAntiForgeryToken]
+        // el elemento toma los datos obtenidos de la vista create sigueindo el modelo carreraima
         public ActionResult Create(CarreraIma mov)
         {
             try
@@ -80,11 +81,11 @@ namespace WaffleWebWorksTpFinal.Controllers
                 SqlConnection connection = new SqlConnection(connectionString);
 
                 connection.Open();
-
+                // en el insert los @carrera son los valores que se van a llenar y despues ejecutar
                 string queryString = "INSERT INTO CarreraImagen (carrera, Descripcion, nombreimagen) VALUES ( @Carrera, @Description, @nombreimagen);";
                
                 SqlCommand command = new SqlCommand(queryString, connection);
-                //  command.ExecuteReader(queryString);
+                
                 //toma los parametros obtenidos para despues agregarlos en el consulta sql
                 command.Parameters.AddWithValue("@Carrera", mov.Name);
                 command.Parameters.AddWithValue("@Description", mov.Description);      

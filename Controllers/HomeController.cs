@@ -21,7 +21,7 @@ namespace WaffleWebWorksTpFinal.Controllers
         // guardo lo necesario para conectar a la base de datos en un string para despues pegar el string y listo
         List<Carrera> list = new List<Carrera>();
         List<CarreraIma> listima = new List<CarreraIma>();
-        //lisrta para guardar los resultados del select
+        //lisrta para guardar los resultados del select y mostrar en el sitio web
         public IActionResult Index()
         {
             try
@@ -31,55 +31,34 @@ namespace WaffleWebWorksTpFinal.Controllers
                 //abre la coencta
                 connection.Open();
                 // guarda en un string el codigo sql a ejecutar
-                //string queryString = "Select * from Carrera";
                 string queryString = "Select * from CarreraImagen";
-                //string queryString = "INSERT INTO MovieADO (Id, titulo, fecha, genero, precio) VALUES (10, 'Delta', 15/12/1999, 'magia', 600);";
-                // no me acurdo, creoq ue guarda en un comadno sql lo que debe ejecutar y en que conexion hacerlo
+                // creoq ue guarda en un variable(command) la consulta sql lo que debe ejecutar y en que conexion para saber en donde se debe ejecutar
                 SqlCommand command = new SqlCommand(queryString, connection);
-                //  command.ExecuteReader(queryString);
-                //command.Parameters.AddWithValue("@Id", id);
-                //ejecuta el codigo sql y guarda en reader
+                //ejecuta el codigo sql y guarda en reader los resultados
                 SqlDataReader reader = command.ExecuteReader();
-
                 //repite las filas obtenidas
                 while (reader.Read())
                 {
-                    //String nameimagen = reader[3].ToString();
-
-                    // nameimagen = nameimagen.Replace("https://drive.google.com/file/d/", "/view?usp=sharing");
-                  //  nameimagen = "https://drive.google.com/uc?export=view&id=" + nameimagen;
+                    // guarda en la variable los iten por categoria o columnas
                     CarreraIma movieADOs = new CarreraIma()
                     {
                         //guarda por elemento del modelo carrera
                         Id = int.Parse(reader[0].ToString()),
-                        Name = reader[1].ToString(),
-                        //
-                        //ReleaseDate = DateTime.Parse(reader[2].ToString()),
+                        Name = reader[1].ToString(),      
                         Description = reader[2].ToString(),
                         Imagen =  reader[3].ToString(),
-                        //Imagen = reader[3].ToString()
-                        
-                    //  Price = int.Parse(reader[4].ToString()),
                 };
-                    //guarda en la lista
+                    //guarda en la lista todo lo guardado en la variable anterioir
                     listima.Add(movieADOs);
-                  //  list.Add(movieADOs);
-                    // return View(movieADOs);
 
-                    //  list.Add(movieADOs);
-                    //list.Add(movieADOs1);
                 }
-
-
                 //cierrra la conexion
                 connection.Close();
                 //muestra la lista de resutltado
                 return View(listima);
-
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -103,21 +82,13 @@ namespace WaffleWebWorksTpFinal.Controllers
                 connection.Open();
 
                 string queryString = "INSERT INTO CarreraImagen (carrera, Descripcion, nombreimagen) VALUES ( @Carrera, @Description, @nombreimagen);";
-                //string queryString = "INSERT INTO MovieADO (Id, titulo, fecha, genero, precio) VALUES (10, 'Delta', 15/12/1999, 'magia', 600);";
+               
                 SqlCommand command = new SqlCommand(queryString, connection);
                 //  command.ExecuteReader(queryString);
                 //toma los parametros obtenidos para despues agregarlos en el consulta sql
                 command.Parameters.AddWithValue("@Carrera", mov.Name);
-                command.Parameters.AddWithValue("@Description", mov.Description);
-                String nameimagen = mov.Imagen;
-
-                
-                //nameimagen = nameimagen.Replace("/view?usp=sharing/","");
-               
-                command.Parameters.AddWithValue("@nombreimagen", nameimagen);
-
-                
-
+                command.Parameters.AddWithValue("@Description", mov.Description);      
+                command.Parameters.AddWithValue("@nombreimagen", mov.Imagen);
                 //ejecuta la consulta
                // SqlDataReader reader = command.ExecuteReader();
                 command.ExecuteNonQuery();
@@ -199,13 +170,9 @@ namespace WaffleWebWorksTpFinal.Controllers
                 command.Parameters.AddWithValue("@Name", mov.Name);
                 command.Parameters.AddWithValue("@Description", mov.Description);
 
-                String nameimagen = mov.Imagen;
-
-                nameimagen = nameimagen.Replace("https://drive.google.com/file/d/", "");
-                nameimagen = nameimagen.Replace("/view?usp=sharing", "");
                 //nameimagen = nameimagen.Replace("/view?usp=sharing/","");
 
-                command.Parameters.AddWithValue("@nombreimagen", nameimagen);
+                command.Parameters.AddWithValue("@nombreimagen", mov.Imagen);
 
 
 
